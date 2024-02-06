@@ -20,6 +20,7 @@ import org.springframework.data.domain.Sort
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import kotlin.reflect.typeOf
 
 @Service
 class PostService(
@@ -44,9 +45,11 @@ class PostService(
     // 챌린지 - 페이징 조회(밑의 번호를 누르면 순서대로 10개씩 나오는 그런거)
     // 챌린지 - 페이징 + 커스텀 정렬 ( 오름차순/ 내림차순/ 작성자명/ n개까지만 출력 등)
 
-    fun getPostList(): Page<PostListResponse> {
-        val pageable: Pageable= PageRequest.of(0, 10, Sort.by("created_at").descending())
+    fun getPostList(page: Int): Page<PostListResponse> {
+        if (page <= 0) throw IllegalArgumentException("페이지는 1부터 시작해요.")
+        val pageable: Pageable= PageRequest.of(page-1, 10, Sort.by("created_at").descending())
         val postPage: Page<Post> = postRepository.findAllByStatus(PostStatus.POSTED, pageable)
+        if (postPage.isEmpty) throw ModelNotFoundException("postPage")
         return postPage
             .map {
                 PostListResponse(

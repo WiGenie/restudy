@@ -19,11 +19,13 @@ class PostController(
     private val postService: PostService
 ) {
 
-    @GetMapping
-    fun getPostList(): ResponseEntity<Page<PostListResponse>> {
+    @GetMapping("/{postPage}")
+    fun getPostList(
+        @PathVariable postPage: Int
+    ): ResponseEntity<Page<PostListResponse>> {
         return ResponseEntity
             .status(HttpStatus.OK)
-            .body(postService.getPostList())
+            .body(postService.getPostList(postPage))
     }
 
     @GetMapping("/{postId}")
