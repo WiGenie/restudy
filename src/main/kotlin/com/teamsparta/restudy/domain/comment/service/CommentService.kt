@@ -20,11 +20,11 @@ class CommentService(
     private val memberRepository: MemberRepository
 ) {
 
-    fun customComments(
-        postId: Long,
-    ):CommentResponse{
-
-    }
+//    fun customComments(
+//        postId: Long,
+//    ):CommentResponse{
+//
+//    }
 
     @Transactional
     fun createComment(
@@ -47,6 +47,7 @@ class CommentService(
 
     @Transactional
     fun updateComment(
+        postId: Long,
         commentId: Long,
         memberPrincipal: MemberPrincipal,
         request: CommentRequest,
@@ -64,6 +65,7 @@ class CommentService(
 
     @Transactional
     fun deleteComment(
+        postId: Long,
         commentId: Long,
         memberPrincipal: MemberPrincipal,
     ) {
