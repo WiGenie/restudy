@@ -29,4 +29,11 @@ class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
             .body(ErrorResponse(e.message))
     }
+
+    @ExceptionHandler(CertificationNumberException::class)
+    fun handleCertificationNumberException(e: CertificationNumberException)
+    :ResponseEntity<ErrorResponse>{
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+            .body(ErrorResponse(e.message))
+    }
 }

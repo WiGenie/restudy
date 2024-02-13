@@ -3,11 +3,11 @@ package com.teamsparta.restudy.domain.post.model
 import com.teamsparta.restudy.domain.comment.dto.CommentResponse
 import com.teamsparta.restudy.domain.member.model.Member
 import com.teamsparta.restudy.domain.post.dto.PostResponse
+import com.teamsparta.restudy.util.entity.BaseEntity
 import jakarta.persistence.*
-import java.time.LocalDateTime
 
 @Entity
-@Table(name = "Posts")
+@Table(name = "posts")
 class Post(
 
     @Column(name = "title", nullable = false)
@@ -16,8 +16,8 @@ class Post(
     @Column(name = "content", nullable = false)
     var content: String,
 
-    @Column(name = "created_at", columnDefinition = "TIMESTAMP(0)", nullable = false, updatable = false)
-    val createdAt: LocalDateTime = LocalDateTime.now(),
+//    @Column(name = "created_at", columnDefinition = "TIMESTAMP(0)", nullable = false, updatable = false)
+//    val createdAt: LocalDateTime = LocalDateTime.now(),
 
     @Column
     @Enumerated(EnumType.STRING)
@@ -28,7 +28,7 @@ class Post(
     val member: Member
 
 
-) {
+) : BaseEntity() {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null

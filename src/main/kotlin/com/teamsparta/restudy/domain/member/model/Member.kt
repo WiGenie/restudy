@@ -4,7 +4,7 @@ import com.teamsparta.restudy.domain.member.dto.MemberResponse
 import jakarta.persistence.*
 
 @Entity
-@Table(name = "Members")
+@Table(name = "members")
 class Member(
 
     @Column(name = "email", nullable = false)

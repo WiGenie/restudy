@@ -29,6 +29,7 @@ class SecurityConfig(
                     "/v3/api-docs/**",
                     "/getPostList",
                     "/getPost",
+                    "/posts/**" //확인용 임시 권한
                 ).permitAll()
                     // 위 URI를 제외하곤 모두 인증이 되어야 함.
                     .anyRequest().authenticated()
